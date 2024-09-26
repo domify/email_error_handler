@@ -1,0 +1,5 @@
+class AddEmailErrorHandlerTo<%= model_name.camelize %> < ActiveRecord::Migration[6.0]
+  def change
+    add_column :<%= table_name %>, :delivery_errors, default: [], array: true
+  end
+end

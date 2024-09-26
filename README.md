@@ -1,24 +1,40 @@
 # EmailErrorHandler
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/email_error_handler`. To experiment with that code, run `bin/console` for an interactive prompt.
+**EmailErrorHandler** is a Ruby gem designed to provide error handling
+for email delivery in Rails applications. 
+It helps manage common SMTP-related errors like authentication failures, timeouts, and recipient rejections. 
+The gem decouples email delivery from error handling, allowing you to use your own mailers and models with minimal overhead.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ bundle add email_error_handler
 
 ## Usage
 
-TODO: Write usage instructions here
+To use EmailErrorHandler, wrap your email delivery logic inside 
+the wrap block. The gem will automatically handle and log any 
+SMTP-related errors.
+
+````Ruby
+class YourEmailModel < ApplicationRecord
+  include EmailDeliveryError
+
+  def deliver_email(email)
+    store_email_delivery_errors do
+      # Your custom email delivery logic here
+      UserMailer.main(self).deliver_now
+    end
+  end
+  # Ensure necessary columns exist in your model: delivery_errors
+end
+````
+
+In this example, MyMailer.notification(email).deliver_now is 
+the user's email delivery logic. 
+EmailErrorHandler wraps it inside the wrap block, 
+ensuring that any SMTP-related errors are caught, stored and handled gracefully.
 
 ## Development
 
@@ -28,7 +44,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/email_error_handler.
+Bug reports and pull requests are welcome on GitHub at https://github.com/domify/email_error_handler.
 
 ## License
 

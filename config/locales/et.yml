@@ -1,0 +1,8 @@
+et:
+  email_error_handler:
+    smtp_authentication_error: "E-posti serveri autentimise viga"
+    smtp_fatal_error: "E-posti serveri kriitiline viga"
+    smtp_unknown_error: "E-posti serveri tundmatu viga"
+    smtp_server_busy: "E-posti server on hõivatud"
+    connection_timeout: "Ühenduse taotlus aegus"
+    server_timeout: "Serveri vastus aegus"

@@ -1,0 +1,8 @@
+en:
+  email_error_handler:
+    smtp_authentication_error: "E-mail server authentication error"
+    smtp_fatal_error: "E-mail server fatal error"
+    smtp_unknown_error: "E-mail server unknown error"
+    smtp_server_busy: "E-mail server busy"
+    connection_timeout: "Connection timeout"
+    server_timeout: "Server timeout"

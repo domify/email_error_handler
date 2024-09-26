@@ -1,0 +1,8 @@
+test:
+  adapter: postgresql
+  encoding: UTF8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch('TEST_POSTGRES_HOST', 'localhost') %>
+  database: <%= ENV.fetch('DRONE_STEP_NAME', nil) || ENV.fetch('TEST_POSTGRES_DB', "#{File.basename(Dir.pwd)}_test#{ ENV['TEST_ENV_NUMBER'] }" ) %>
+  username: <%= ENV.fetch('TEST_POSTGRES_USER', 'postgres') %>
+  password: <%= ENV.fetch('TEST_POSTGRES_PASSWORD', 'test') %>
